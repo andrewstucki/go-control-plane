@@ -21,7 +21,7 @@ import (
 	"fmt"
 	"sync/atomic"
 
-	"github.com/golang/protobuf/proto"
+	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/types/known/anypb"
 	"google.golang.org/protobuf/types/known/durationpb"
 
@@ -301,7 +301,7 @@ func (r *RawDeltaResponse) GetContext() context.Context {
 	return r.Ctx
 }
 
-var deltaResourceTypeURL = "type.googleapis.com/" + string(proto.MessageReflect(&discovery.Resource{}).Descriptor().FullName())
+var deltaResourceTypeURL = "type.googleapis.com/" + string(proto.MessageName(&discovery.Resource{}))
 
 func (r *RawResponse) maybeCreateTTLResource(resource types.ResourceWithTTL) (types.Resource, string, error) {
 	if resource.TTL != nil {
